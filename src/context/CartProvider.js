@@ -1,6 +1,7 @@
 import React from 'react'
 import { Alert } from 'react-native'
 import { array } from 'prop-types'
+import state from '../services/MockServices'
 
 export const CartContext = React.createContext()
 
@@ -37,7 +38,9 @@ export default class CartProvider extends React.Component {
       
   }
   toggleLogin = () => {
-    this.setState({isLogged: !this.state.isLogged})
+      this.setState((prevState) => {
+        return {isLogged: !prevState.isLogged}
+      })
   }
   render(){
     return (

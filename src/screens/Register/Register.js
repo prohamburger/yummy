@@ -30,7 +30,6 @@ export default class Register extends React.Component {
     })
   }
   componentDidMount(){
-    RegisterUser()
   }
   render(){
     const { displayPassword, nameEye } = this.state;
@@ -71,7 +70,7 @@ export default class Register extends React.Component {
             <Button
               title={"Đăng ký"}
               color={"#FF9797"}
-              onPress={this.register}
+              onPress={this.RegisterUser}
             >
             </Button>
             <View

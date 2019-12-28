@@ -67,7 +67,6 @@ export default class RecipeDetail extends React.Component{
                     <Text style={styles.stepTitle}>Các bước tiến hành</Text>
                     <FlatList
                         data={item.step}
-                        keyExtractor={item => `${item.id}`}
                         renderItem={({item}) => (
                         <View>
                             <Text 
@@ -76,6 +75,7 @@ export default class RecipeDetail extends React.Component{
                             <Text style={{marginLeft: 10, marginTop: 10, fontStyle: 'italic', width: 380}}>{item.description}</Text>
                         </View>
                         )}
+                        keyExtractor={item => item.id}
                     />
                 </View>
             </ScrollView>

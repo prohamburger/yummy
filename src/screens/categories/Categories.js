@@ -37,6 +37,7 @@ export default class Categories extends React.Component {
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 renderItem={this.renderCategories}
+                keyExtractor={item => item._id}
             >
             </FlatList>
         );

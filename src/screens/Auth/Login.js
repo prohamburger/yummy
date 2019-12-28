@@ -1,13 +1,23 @@
 import React from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { LoginUser } from '../../services/MockServices';
+import { LoginUser, isLoggedIn } from '../../services/MockServices';
 import { CartContext } from '../../context/CartProvider'
+import MenuButton from '../../components/MenuButton/MenuButton'
+
 class Login extends React.Component{
   static navigationOptions = ({ navigation }) => ({
-    header: null,
+    headerLeft: (
+      <MenuButton
+      title={'TRANG CHỦ'}
+      onPress={() => {
+        navigation.navigate('Home');
+        }
+      }
+    />
+    ),
   })
     constructor(props){
         super(props);
@@ -15,7 +25,8 @@ class Login extends React.Component{
           displayPassword: true,
           nameEye: "ios-eye-off",
           username: "",
-          password: ""
+          password: "",
+          loggedIn: false
         }
         this.onPressEye = this.onPressEye.bind(this);
     }
@@ -33,15 +44,20 @@ class Login extends React.Component{
           }
       })
     }
-    submit = () => {
+    submit = (login) => {
       const user = {username: this.state.username, password: this.state.password}
       LoginUser(user)
       .then(data => {
         if(data.status === 200 && data.data.state === 'Success'){
+          login()
           this.props.navigation.navigate('User')
+        } else {
+          alert('Sai thông tin đăng nhập');
         }
       })
-      .catch(e => console.log(e))
+      .catch(e => {
+        console.log(e)
+      })
     }
     render(){
       const { displayPassword, nameEye } = this.state;
@@ -84,7 +100,7 @@ class Login extends React.Component{
                 <Button
                 title={"Đăng nhập"}
                 color={"#FF9797"}
-                onPress={()=>{this.submit(); toggleLogin()}}
+                onPress={()=>{this.submit(toggleLogin)}}
               />
               </TouchableOpacity>
               )}

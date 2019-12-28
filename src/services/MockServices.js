@@ -2,7 +2,7 @@ import { recipes, categories } from '../data/dataArrays';
 import { Buffer } from 'buffer'
 import { Alert, AsyncStorage } from 'react-native'
 
-axios.defaults.baseURL = 'http://192.168.0.105:3000/'
+axios.defaults.baseURL = 'http://192.168.1.8:3000/'
 
 import axios from 'axios'
 
@@ -57,9 +57,11 @@ export async function getRecipesByCategoryId(categoryId){
 
 export function RegisterUser(user) {
   try {
-    axios.post('/user/register', {
+    axios.post('/register', {
       username: user.username,
       password: user.password
+    }, {
+      headers: {Authorization: `Basic ${auth}`}
     })
   } catch (e) {
     console.log(e)
@@ -74,13 +76,13 @@ export async function LoginUser(user) {
     const response = await axios.post('/user/login', {}, {
       headers: {Authorization: `Basic ${auth}`}
     })
-    AsyncStorage.setItem('favourite', response.data.user[0])
+    console.log(response)
     return response
   } catch (e) {
-    console.log(e)
-    Alert.alert('Thông báo','Sai thông tin đăng nhập')
+    console.log(e.response)
   }
 }
+
 export async function favourite(recipe_id) {
   const auth = AsyncStorage.getItem('auth')
   auth.then(data => console.log(data))
