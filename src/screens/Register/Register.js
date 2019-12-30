@@ -3,8 +3,20 @@ import { View, Text, TextInput, Button } from 'react-native'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RegisterUser } from '../../services/MockServices'
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import MenuButton from '../../components/MenuButton/MenuButton'
 export default class Register extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: (
+      <MenuButton
+      title={'TRANG CHỦ'}
+      onPress={() => {
+        navigation.navigate('Home');
+        }
+      }
+    />
+    ),
+  })
   constructor(props){
     super(props)
     this.state = { 
@@ -29,10 +41,11 @@ export default class Register extends React.Component {
         }
     })
   }
-  componentDidMount(){
+  navigationToLogin(){
+    this.props.navigation.navigate('Auth');
   }
   render(){
-    const { displayPassword, nameEye } = this.state;
+    const { displayPassword, nameEye, username, password } = this.state;
       return(
           <View style={styles.container}>
           <View style={styles.logo}> 
@@ -67,17 +80,14 @@ export default class Register extends React.Component {
                 onPress={this.onPressEye}
                 />
           </View>
+          <TouchableOpacity>
             <Button
-              title={"Đăng ký"}
-              color={"#FF9797"}
-              onPress={this.RegisterUser}
-            >
+                title={"Đăng ký"}
+                color={"#FF9797"}
+                onPress={() => {RegisterUser({username, password}), this.navigationToLogin()}}
+              >
             </Button>
-            <View
-              style={styles.line}
-            >
-              <Text>{this.state.password}</Text>
-            </View>
+          </TouchableOpacity>
       </View>
       );
   }

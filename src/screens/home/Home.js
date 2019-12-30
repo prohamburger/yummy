@@ -47,7 +47,10 @@ export default class Home extends React.Component {
     };
 
     componentDidMount(){
-      getRecipes(1, 6).then(data => this.setState({recipes: data.results}))
+      getRecipes(1, 6)
+      .then(data => {
+        this.setState({recipes: data.results})
+      })
     }
     handleBackButton = () => {
         return true;

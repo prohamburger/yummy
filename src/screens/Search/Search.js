@@ -3,7 +3,6 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import { searchRecipes } from '../../services/MockServices'
 import Item from '../../components/Item'
-import {recipes} from '../../data/dataArrays'
 export default class Search extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -36,13 +35,11 @@ export default class Search extends React.Component {
       )
     }
   };
-  constructor(props){
-    super(props);
-    this.state = {
+    state = {
       search: '',
       results: []
     }
-  }
+  
   handleSearch = (search) => {
     this.setState({search})
     searchRecipes(this.state.search)
@@ -65,7 +62,7 @@ export default class Search extends React.Component {
   renderRecipes = (item) => (
     <TouchableOpacity onPress={()=>this.onPressRecipe(item)}>
       <Item item={item}/>
-    </TouchableOpacity>  
+    </TouchableOpacity>
   )
   render() {
     return (

@@ -855,6 +855,11 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
+"@react-native-community/async-storage@^1.6.3", "@react-native-community/async-storage@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.7.1.tgz#ef2104d865de61ad91bba66613e57e689ff4e6a1"
+  integrity sha512-/oX/x+EU4xNaqIaC/epVKzO8XghzImPA7l8cLz3USEFmtFiXFjBbTeeIFjjEm/u4/cv38Wi1xMEa10PHIWygRg==
+
 "@react-native-community/cli@^1.2.1":
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.11.2.tgz#b14967f24a389f5a16889a747345cf0e5757a2f1"
@@ -5978,6 +5983,13 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+sync-storage@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/sync-storage/-/sync-storage-0.4.2.tgz#5af55cdf12108535525b36aa77587d3db7a0b5fb"
+  integrity sha512-2vv1wjlMv8H3VaoPguScy3HNcE59MaVK4C/3LbKFGdgOqKUm8vfHB3VTqiN+jK4GvwkdS8X4RR4GppgWx14qAg==
+  dependencies:
+    "@react-native-community/async-storage" "^1.6.3"
 
 tar@^4:
   version "4.4.13"

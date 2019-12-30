@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppContainer from './src/navigation/AppNavigation';
-import Splash from './src/screens/splash/Splash';
 import CartProvider from './src/context/CartProvider'
+
+console.disableYellowBox = true;
 
 export default function App() {
   return (

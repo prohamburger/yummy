@@ -17,7 +17,7 @@ export default function Ingredients(props) {
                   </View>
               }
               contentContainerStyle={styles.container}
-              keyExtractor={item => item.name}
+              keyExtractor={(item, index) => index.toString()}
               numColumns={2}
           />
           <CartContext.Consumer>

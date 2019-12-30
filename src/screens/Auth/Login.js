@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Button, Text, Alert } from 'react-native';
+import { View, TextInput, Button, Text, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -44,12 +44,14 @@ class Login extends React.Component{
           }
       })
     }
-    submit = (login) => {
+    submit = (toggleLogin) => {
       const user = {username: this.state.username, password: this.state.password}
       LoginUser(user)
       .then(data => {
         if(data.status === 200 && data.data.state === 'Success'){
-          login()
+          AsyncStorage.setItem('@favourite', JSON.stringify(data.data.user[0].favourite))
+          AsyncStorage.setItem('@user', JSON.stringify(data.data.user[0].username))
+          toggleLogin()
           this.props.navigation.navigate('User')
         } else {
           alert('Sai thông tin đăng nhập');
