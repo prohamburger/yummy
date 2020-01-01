@@ -9,13 +9,11 @@ const styles = StyleSheet.create({
         width: WIDTH_SCREEN / 3,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 0.5,
         borderRadius: 15,
-        borderColor: '#efefef'
     },
     photo: {
-        width: 90,
-        height: 90,
+        width: 100,
+        height: 100,
         borderRadius: 15,
     }
 })

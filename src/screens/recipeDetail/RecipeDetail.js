@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ScrollView, View, Text, Image, AsyncStorage, Button, Alert } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import Ingredients from '../../components/Ingredients/Ingredients';
 import ImageCollection from '../../components/ImageCollection/ImageCollection';
 import styles from './styles'
@@ -9,11 +9,21 @@ import { favourite } from '../../services/MockServices'
 import CartProvider, { CartContext } from '../../context/CartProvider'
 
 export default class RecipeDetail extends React.Component{
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTransparent: 'true',
+      headerLeft: (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={require('../../../assets/back.png')} style={{width: 40, height: 30, marginLeft: 5}}/>
+        </TouchableOpacity>
+      )
+    }
+  }
     constructor(props){
         super(props);
         this.state = {
           nameHeart: 'md-heart-empty',
-          color: '#ededed'
+          color: '#ff3030'
         }
     }
     componentDidMount () {
@@ -32,6 +42,12 @@ export default class RecipeDetail extends React.Component{
       catch(e) {
         console.log(e)
       }
+      navigation.setParams({
+        goBack: this.goBack
+      })
+    }
+    goBack() {
+      this.props.navigation.goBack();
     }
     heart = () => {
       const value = this.context
@@ -43,12 +59,12 @@ export default class RecipeDetail extends React.Component{
           if(prevState.nameHeart === "md-heart-empty")
             return {
               nameHeart: "md-heart",
-              color: '#ff3030'
+              color: '#ff6c6c'
             } 
             else 
             return {
               nameHeart: "md-heart-empty",
-              color: '#ededed'
+              color: '#ff3030'
             }
         })
         favourite(item._id)
@@ -78,7 +94,7 @@ export default class RecipeDetail extends React.Component{
                 </View>
                 <View style={styles.time}>
                   <Image style={styles.timer} source={require("../../../assets/time.png")}/>
-                  <Text>{item.time}'</Text>
+                  <Text style={{color: '#FF9797'}}>{item.time}'</Text>
                 </View>
               </View>
               <Ingredients ingredients={item.ingredients} title={item.title}/>

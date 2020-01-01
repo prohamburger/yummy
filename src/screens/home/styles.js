@@ -6,6 +6,9 @@ const WIDTH_SCREEN = width < height ? width : height;
 
 
 const styles = StyleSheet.create({
+    container: {
+      width: WIDTH_SCREEN,
+    },
     header: {
       backgroundColor: '#ededed',
       width: WIDTH_SCREEN - 80,
@@ -14,10 +17,16 @@ const styles = StyleSheet.create({
     },
     content:{
         width: WIDTH_SCREEN,
-        borderColor: '#efefef',
-        borderRadius: 15,
-        borderWidth: 0.5,
-        paddingTop: 10
+        paddingTop: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        
+        elevation: 4,
     },
     slide:{
         width: WIDTH_SCREEN,

@@ -21,7 +21,8 @@ export default class Home extends React.Component {
       this.state = {
         recipes: [],
         page: 2,
-        limit: 6
+        limit: 6,
+        display: true
       }
     }
     static navigationOptions = ({ navigation }) => {
@@ -59,7 +60,12 @@ export default class Home extends React.Component {
         this.props.navigation.navigate('RecipeDetail', {item});
     }
     showMoreRecipes(){
-      getRecipes(this.state.page, this.state.limit).then(data => this.setState({recipes: [...this.state.recipes, ...data.results]}))
+      getRecipes(this.state.page, this.state.limit).then(data => {
+        this.setState({recipes: [...this.state.recipes, ...data.results]})
+        if (!data.next) {
+          this.setState({display: false})
+        }
+      })
       this.setState({page: this.state.page + 1})
     }
     renderRecipes = ({ item }) => (
@@ -68,6 +74,7 @@ export default class Home extends React.Component {
         </TouchableOpacity>  
     );
     render() {
+      const { display } = this.state
         return (
             <ScrollView>
                 <Image
@@ -83,11 +90,11 @@ export default class Home extends React.Component {
                     keyExtractor={item => `${item._id}`}
                     contentContainerStyle={styles.content}
                 />
-                <TouchableOpacity onPress={()=>this.showMoreRecipes()}>
+                {display ? <TouchableOpacity onPress={()=>this.showMoreRecipes()}>
                   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{color: '#FF9797'}}>Xem thêm</Text>
                   </View>
-                  </TouchableOpacity>
+                  </TouchableOpacity> : null}
             </ScrollView>
         );
     }

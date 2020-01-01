@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Button, Text, AsyncStorage } from 'react-native';
+import { View, TextInput, Button, Text, AsyncStorage, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -54,7 +54,7 @@ class Login extends React.Component{
           toggleLogin()
           this.props.navigation.navigate('User')
         } else {
-          alert('Sai thông tin đăng nhập');
+          Alert.alert('Thông báo', 'Sai thông tin đăng nhập');
         }
       })
       .catch(e => {

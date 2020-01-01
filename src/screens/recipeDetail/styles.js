@@ -7,7 +7,7 @@ const SCREEN_WIDTH = width < height ? width : height
 const styles = StyleSheet.create({
   photo: {
     width: SCREEN_WIDTH,
-    height: 150
+    height: 250
   },
   wraptitle: {
     flex: 1,

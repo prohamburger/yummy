@@ -5,6 +5,19 @@ import Item from '../../components/Item';
 import styles from './styles'
 
 export default class RecipesList extends React.Component{
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state
+    return {
+      headerStyle: ({
+        backgroundColor: '#FF9797',
+      }),
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+      title: 'Phân loại'
+    }
+  }
     constructor(props){
         super(props)
         this.state = {

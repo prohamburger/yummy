@@ -4,6 +4,19 @@ import Category from '../../components/Category/Category';
 import { getCategories } from '../../services/MockServices';
 import styles from './styles'
 export default class Categories extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state
+    return {
+      headerStyle: ({
+        backgroundColor: '#FF9797',
+      }),
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+      title: 'Phân loại'
+    }
+  }
     constructor() {
         super();
         this.state = {
@@ -14,8 +27,8 @@ export default class Categories extends React.Component {
     selectCategory(item){
         this.props.navigation.navigate('RecipesList', { item })
     }
-    componentDidMount() {
-      getCategories().then(data => this.setState({categories: data}))
+    async componentDidMount() {
+      await getCategories().then(data => this.setState({categories: data}))
     }
 
     renderCategories = ({ item }) => (

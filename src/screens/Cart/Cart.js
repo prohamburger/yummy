@@ -5,8 +5,16 @@ import styles from './styles'
 
 export default class Cart extends React.Component{
   static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state
     return {
-      headerTitle: <Text>Danh sách mua sắm</Text>
+      headerStyle: ({
+        backgroundColor: '#FF9797',
+      }),
+      headerTitleStyle: {
+        color: '#fff',
+      },
+      headerTintColor: '#fff',
+      title: 'Danh sách mua sắm'
     }
   }
   render(){

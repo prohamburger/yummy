@@ -8,7 +8,7 @@ export default function MenuButton(props){
             style={styles.btnClickContain}
         >
             <View style={styles.container}>
-                <Image style={{width: 40, height: 40}} source={props.source}></Image>
+                <Image style={{width: 30, height: 30}} source={props.source}></Image>
                 <Text style={styles.btnText}>{props.title}</Text>
             </View>
         </TouchableOpacity>
