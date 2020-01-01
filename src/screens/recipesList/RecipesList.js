@@ -15,21 +15,25 @@ export default class RecipesList extends React.Component{
         color: '#fff',
       },
       headerTintColor: '#fff',
-      title: 'Phân loại'
+      title: `${params.name}`
     }
   }
-    constructor(props){
-        super(props)
-        this.state = {
-          recipes_list: []
-        }
+
+    state = {
+      recipes_list: [],
+      name: ''
     }
     selectRecipes = (item) => {
         this.props.navigation.navigate('RecipeDetail', {item})
     }
-    componentDidMount() {
-      const category = this.props.navigation.getParam('item');
-      getRecipesByCategoryId(category._id).then(data => this.setState({recipes_list: data}))
+    async componentDidMount() {
+      const { navigation } = this.props
+      const category = navigation.getParam('item');
+      await getRecipesByCategoryId(category._id)
+      .then(data => this.setState({recipes_list: data}))
+      navigation.setParams({
+        name: category.name
+      })
     }
     renderRecipesList = (item) => 
         <TouchableOpacity onPress={() => this.selectRecipes(item)}>

@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const {width, height} = Dimensions.get('window');
+
+const WIDTH_SCREEN = width < height ? width : height;
 
 const styles = StyleSheet.create({
   categoriesItemContainer: {
@@ -10,6 +13,7 @@ const styles = StyleSheet.create({
     borderColor: '#cccccc',
     borderWidth: 0.5,
     borderRadius: 20,
+    position: 'relative'
   },
   categoriesPhoto: {
     width: '100%',
@@ -36,6 +40,10 @@ const styles = StyleSheet.create({
   categoriesInfo: {
     marginTop: 3,
     marginBottom: 5
+  },
+  meat: {
+    width: WIDTH_SCREEN,
+    height: 150
   }
 });
 
