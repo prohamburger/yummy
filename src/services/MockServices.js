@@ -16,6 +16,16 @@ export async function getRecipes(page, limit){
     }
     return recipes;
 }
+export async function getRecipesVegetarian(page, limit){
+  let recipes = []
+  try {
+    const response = await axios.get(`/recipes/vegetarian?page=${page}&limit=${limit}`);
+    recipes = response.data
+  } catch(e) {
+    console.log(e)
+  }
+  return recipes;
+}
 
 export async function searchRecipes(keyword) {
   let results = []
@@ -56,18 +66,21 @@ export async function getRecipesByCategoryId(categoryId){
 }
 
 export async function RegisterUser(user) {
+  console.log(user);
   try {
     const response = await axios.post('/register', {
       username: user.username,
-      password: user.password
+      password: user.password,
+      vegetarian: user.vegetariant
     })
     if (response.status === 200) {
       Alert.alert('Thông báo', 'Đăng ký thành công')
     }
   } catch (e) {
     console.log(e.response.data.message )
-    if (e.response.status === 400 && e.response.data.message === 'Da trung')
+    if (e.response.status === 400 && e.response.data.message === 'Đã trùng')
       Alert.alert('Thông báo', 'Tài khoản đã tồn tại')
+    else Alert.alert('Thông báo', e.response.data.message)
   }
 }
 export async function LoginUser(user) {

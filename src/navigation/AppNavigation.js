@@ -23,13 +23,12 @@ const AppNavigator = createStackNavigator({
     Search: Search,
     Cart: Cart,
     User: User,
-    Register: Register
 },
 {
     initialRouteName: 'Home'
 });
 
-const AuthStack = createStackNavigator({ Login: Login });
+const AuthStack = createStackNavigator({ Login: Login, Register: Register });
 
 const DrawerStack = createDrawerNavigator({
     Main: AppNavigator,

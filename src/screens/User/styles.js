@@ -48,5 +48,6 @@ export const styles = StyleSheet.create({
   recipePhoto: {
     width: SCREEN_WIDTH / 3 - 10,
     height: 120,
+    borderRadius: 20
   }
 })

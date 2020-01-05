@@ -3,10 +3,10 @@ import { View, Text, TextInput, Button, AsyncStorage, Image, ImageBackground } f
 import { CartContext } from '../../context/CartProvider'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import { getFavouriteRecipe } from '../../services/MockServices'
-import Item from '../../components/Item'
 import Hamburger from '../../components/Hamburger/Hamburger'
 import { styles } from './styles'
 const whiteHamburger = require('../../../assets/hamburger-icon--white.png')
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class User extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,10 +19,9 @@ export default class User extends React.Component {
         color: '#fff',
       },
       headerLeft: (
-        <Hamburger
-          onPress={() => navigation.openDrawer()}
-          src={whiteHamburger}
-        />
+        <TouchableOpacity style={{ marginLeft: 20 }} onPress={() => navigation.openDrawer()}>
+          <Hamburger src={whiteHamburger} />
+        </TouchableOpacity>
       ),
       headerRight: (
         <TouchableOpacity onPress={() => params._signOutAsync()}>
@@ -38,13 +37,14 @@ export default class User extends React.Component {
     favourite: [],
     favouriteList: [],
     isEmpty: true,
-    loaded: true
+    loaded: true,
+    vegetarian: false
   }
   subs = []
 
-  componentDidMount() {
+  componentWillMount() {
     this.subs = [
-      this.props.navigation.addListener('didFocus', this.componentDidFocus.bind(this)),
+      this.props.navigation.addListener('willFocus', this.componentDidFocus.bind(this)),
     ];
     const { navigation } = this.props
     navigation.setParams({
@@ -59,7 +59,14 @@ export default class User extends React.Component {
       .catch(e => {
         console.log(e)
       })
-      await AsyncStorage.getItem('@favourite')
+    await AsyncStorage.getItem('@vegetarian')
+      .then(data => {
+        this.setState({ vegetarian: JSON.parse(data) })
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    await AsyncStorage.getItem('@favourite')
       .then(data => {
         let temp = JSON.parse(data)
         let favourite = temp.map(id => ({ id }))
@@ -69,9 +76,9 @@ export default class User extends React.Component {
         getFavouriteRecipe(this.state.favourite)
           .then(data => {
             if (data.length !== 0)
-              this.setState({ favouriteList: data, isEmpty: false, loaded: false})
+              this.setState({ favouriteList: data, isEmpty: false, loaded: false })
             else
-              this.setState({isEmpty: true, loaded: false})
+              this.setState({ isEmpty: true, loaded: false })
           })
       })
   }
@@ -100,6 +107,7 @@ export default class User extends React.Component {
     this.props.navigation.navigate('Auth')
   };
   render() {
+    const { vegetarian } = this.state
     return (
       <View>
         <View style={styles.container}>
@@ -107,17 +115,22 @@ export default class User extends React.Component {
             <View>
               <Image style={styles.avatar} source={require('../../../assets/149071.png')} />
             </View>
-            <Text style={{fontWeight: '500'}}>{this.state.username}</Text>
+            <View style={{ display: 'flex', flexDirection: 'row' }}>
+              <Text style={{ fontWeight: '500', marginRight: 5 }}>{this.state.username}</Text>
+              {vegetarian ? <Icon name={"md-leaf"} size={20} color={"green"} style={styles.iconLeft} /> : null}
+            </View>
           </ImageBackground>
-          {!this.state.loaded ? !this.state.isEmpty ? <View style={styles.content}>
-            <FlatList
-              data={this.state.favouriteList}
-              renderItem={this.renderRecipes}
-              keyExtractor={(item, index) => `${item._id}`}
-              numColumns={3}
-            >
-            </FlatList>
-          </View> : <Image source={require('../../../assets/family.png')} style={{width: 400, height: 400}}/> : null}
+          {!this.state.loaded ? 
+            !this.state.isEmpty ?
+            <View style={styles.content}>
+              <FlatList
+                data={this.state.favouriteList}
+                renderItem={this.renderRecipes}
+                keyExtractor={(item, index) => `${item._id}`}
+                numColumns={3}
+              >
+              </FlatList>
+            </View> : <Image source={require('../../../assets/family.png')} style={{ width: 400, height: 400 }} /> : null}
         </View>
       </View>
     );

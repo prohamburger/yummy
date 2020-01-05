@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+const WIDTH_SCREEN = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
@@ -19,5 +20,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontStyle: "italic"
   },
+  image: {
+    width: WIDTH_SCREEN,
+    flex: 1
+  }
 })
 export default styles

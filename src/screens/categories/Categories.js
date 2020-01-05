@@ -20,8 +20,8 @@ export default class Categories extends React.Component {
     constructor() {
         super();
         this.state = {
-          categories: [],
-          categories1: [],
+          show1: false,
+          show2: false
         }
         this.selectCategory = this.selectCategory.bind(this);
     }
@@ -52,31 +52,43 @@ export default class Categories extends React.Component {
                 source={item.photo_url}
             />
         </View>
-
     )
-
+    toggle1 = () => {
+      this.setState({show1: !this.state.show1})
+    }
+    toggle2 = () => {
+      this.setState({show2: !this.state.show2})
+    }
     render() {
         return (
           <ScrollView>
-            <Image source={require('../../../assets/meat.jpg')} style={styles.meat}/>
-            <FlatList
-                data={this.state.categories}
-                alwaysBounceVertical
-                showsVerticalScrollIndicator={false}
-                numColumns={1}
-                renderItem={this.renderCategories}
-                keyExtractor={item => item._id}
-            >
-            </FlatList>
-            <Image source={require('../../../assets/vegetable.jpg')} style={styles.meat}/>
-            <FlatList
+            <TouchableOpacity onPress={() => this.toggle1()}>
+              <Image source={require('../../../assets/meat.jpg')} style={styles.meat}/>
+            </TouchableOpacity>
+              { this.state.show1 ?
+                <FlatList
+                    data={this.state.categories}
+                    alwaysBounceVertical
+                    showsVerticalScrollIndicator={false}
+                    numColumns={1}
+                    renderItem={this.renderCategories}
+                    keyExtractor={item => item._id}
+                >
+                </FlatList> : null
+              }
+            <TouchableOpacity onPress={() => this.toggle2()}>
+              <Image source={require('../../../assets/vegetable.jpg')} style={styles.meat}/>
+            </TouchableOpacity>
+            { this.state.show2 ? 
+              <FlatList
                 data={this.state.categories2}
                 alwaysBounceVertical
                 showsVerticalScrollIndicator={false}
                 renderItem={this.renderCategories}
                 keyExtractor={item => item._id}
-            >
-            </FlatList>
+              >
+              </FlatList> : null
+            }
           </ScrollView>
         );
     }

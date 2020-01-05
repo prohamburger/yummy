@@ -8,8 +8,6 @@ const styles = StyleSheet.create({
     width: WIDTH_SCREEN - 20,
     height: 155,
     borderRadius: 20,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
   },
   categoriesName: {
     flex: 1,

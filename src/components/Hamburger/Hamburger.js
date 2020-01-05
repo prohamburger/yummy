@@ -6,14 +6,12 @@ const whiteHamburger = require('../../../assets/hamburger-icon--white.png')
 export default class Hamburger extends React.Component{
     render(){
         return(
-            <TouchableOpacity style={styles.hamburger} onPress={this.props.onPress}>
-              <View style={{marginTop: 20, marginLeft: 20}}>
+              <View>
                 <Image
                     source={this.props.src || pinkHamburger}
                 >
                 </Image>
               </View>
-            </TouchableOpacity>
         );
     }
 }

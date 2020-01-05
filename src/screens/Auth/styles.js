@@ -1,19 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const WIDTH = Dimensions.get('window').width
+const HEIGHT = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'stretch',
+      alignItems: 'center',
       justifyContent: 'center',
-      padding: 50
+      width: WIDTH,
+      height: HEIGHT + 50,
     },
     input:{
       height: 40,
-      borderRadius: 10,
+      width: WIDTH - 100,
+      borderRadius: 20,
       borderStyle: "solid",
       borderWidth: 1,
-      borderColor: "#ededed",
+      borderColor: "#cccccc",
       marginBottom: 10,
       paddingLeft: 40,
       paddingRight: 40
@@ -28,10 +31,26 @@ const styles = StyleSheet.create({
       right: 10,
       top: 5
     },
-    line:{
+    button: {
+      height: 40,
+      width: 150,
+      borderRadius: 20,
+      backgroundColor: '#FF9797',
+      color: '#fff',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    home: {
+      width: 50, 
+      height: 50, 
+      borderRadius: 50, 
+      backgroundColor: '#fff',
+      marginLeft: 10,
       marginTop: 10,
-      borderWidth: 0.3,
-      borderColor: "#ccc"
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });
 export default styles;

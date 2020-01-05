@@ -19,17 +19,13 @@ const styles = StyleSheet.create({
     marginLeft: RECIPE_ITEM_MARGIN,
     marginTop: 20,
     width: (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) / recipeNumColums,
-    height: RECIPE_ITEM_HEIGHT + 75,
+    height: RECIPE_ITEM_HEIGHT + 25,
     borderColor: '#cccccc',
-    borderWidth: 0.5,
-    borderRadius: 15
   },
   photo: {
     width: (SCREEN_WIDTH - (recipeNumColums + 1) * RECIPE_ITEM_MARGIN) / recipeNumColums,
     height: RECIPE_ITEM_HEIGHT,
     borderRadius: 15,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0
   },
   title: {
     flex: 1,

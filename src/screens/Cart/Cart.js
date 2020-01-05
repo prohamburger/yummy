@@ -32,7 +32,7 @@ export default class Cart extends React.Component{
               </View>
             )}
           ></FlatList> :
-          <Image source={require('../../../assets/empty.jpg')}/>
+          <Image source={require('../../../assets/emptyCart.jpg')} style={styles.image}/>
         )}
       </CartContext.Consumer>
     );
