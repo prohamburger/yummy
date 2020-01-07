@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, View, Text, TouchableOpacity, Image} from 'react-native'
-import { getRecipesByCategoryId } from '../../services/MockServices';
+import { getRecipesByCategoryId } from '../../services/Services';
 import Item from '../../components/Item';
 import styles from './styles'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TextInput, Button, AsyncStorage, Image, ImageBackground } from 'react-native'
 import { CartContext } from '../../context/CartProvider'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
-import { getFavouriteRecipe } from '../../services/MockServices'
+import { getFavouriteRecipe } from '../../services/Services'
 import Hamburger from '../../components/Hamburger/Hamburger'
 import { styles } from './styles'
 const whiteHamburger = require('../../../assets/hamburger-icon--white.png')

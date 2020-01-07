@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TextInput, Button, ImageBackground } from 'react-native'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { RegisterUser } from '../../services/MockServices'
+import { RegisterUser } from '../../services/Services'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MenuButton from '../../components/MenuButton/MenuButton'
 import Hamburger from '../../components/Hamburger/Hamburger'

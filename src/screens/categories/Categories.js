@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, TouchableHighlight, Image, ScrollView } from 'react-native';
 import Category from '../../components/Category/Category';
-import { getCategories } from '../../services/MockServices';
+import { getCategories } from '../../services/Services';
 import styles from './styles'
 export default class Categories extends React.Component {
   static navigationOptions = ({ navigation }) => {

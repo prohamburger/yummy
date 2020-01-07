@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { SearchBar } from 'react-native-elements'
-import { searchRecipes } from '../../services/MockServices'
+import { searchRecipes } from '../../services/Services'
 import Item from '../../components/Item'
 export default class Search extends React.Component {
   static navigationOptions = ({ navigation }) => {

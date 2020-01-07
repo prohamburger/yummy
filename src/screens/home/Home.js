@@ -8,7 +8,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import styles from './styles';
-import { getRecipes, getRecipesVegetarian } from '../../services/MockServices';
+import { getRecipes, getRecipesVegetarian } from '../../services/Services';
 import Item from '../../components/Item';
 // import { recipes } from '../../data/dataArrays'
 import Hamburger from '../../components/Hamburger/Hamburger';

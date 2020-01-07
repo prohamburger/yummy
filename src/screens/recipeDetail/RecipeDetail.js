@@ -5,7 +5,7 @@ import Ingredients from '../../components/Ingredients/Ingredients';
 import ImageCollection from '../../components/ImageCollection/ImageCollection';
 import styles from './styles'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { favourite } from '../../services/MockServices'
+import { favourite } from '../../services/Services'
 import CartProvider, { CartContext } from '../../context/CartProvider'
 
 export default class RecipeDetail extends React.Component{

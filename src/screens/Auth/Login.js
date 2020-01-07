@@ -3,7 +3,7 @@ import { View, TextInput, Button, Text, AsyncStorage, Alert, ImageBackground, Ba
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { LoginUser, isLoggedIn } from '../../services/MockServices';
+import { LoginUser, isLoggedIn } from '../../services/Services';
 import { CartContext } from '../../context/CartProvider'
 import MenuButton from '../../components/MenuButton/MenuButton'
 import Hamburger from '../../components/Hamburger/Hamburger'

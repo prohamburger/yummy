@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert } from 'react-native'
 import { array } from 'prop-types'
-import state from '../services/MockServices'
+import state from '../services/Services'
 
 export const CartContext = React.createContext()
 
