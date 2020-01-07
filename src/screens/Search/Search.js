@@ -66,12 +66,15 @@ export default class Search extends React.Component {
   )
   render() {
     return (
-      <FlatList
-        data={this.state.results}
-        renderItem={({item}) => this.renderRecipes(item)}
-        keyExtractor={item => `${item._id}`}
-        numColumns={3}
-      />
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <FlatList
+          data={this.state.results}
+          renderItem={({item}) => this.renderRecipes(item)}
+          keyExtractor={item => `${item._id}`}
+          numColumns={3}
+        />
+      </View>
+
     )
   }
 }

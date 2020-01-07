@@ -22,9 +22,11 @@ export default class Home extends React.Component {
     super()
     this.state = {
       recipes: [],
-      page: 2,
+      page1: 2,
+      page2: 2,
       limit: 6,
-      display: true,
+      display1: false,
+      display2: false,
       vegetarian: false
     }
   }
@@ -57,19 +59,31 @@ export default class Home extends React.Component {
     const { isLogged } = this.context
     if (isLogged) {
       await AsyncStorage.getItem('@vegetarian')
-      .then((data) => {
-        if (JSON.parse(data)) {
-          getRecipesVegetarian(1, 6)
-          .then(data => this.setState({recipes: data.results, vegetarian: true}))
-        }
-        else {
-          getRecipes(1, 6)
-          .then(data => this.setState({recipes: data.results}))
-        }
-      })
+        .then((data) => {
+          if (JSON.parse(data)) {
+            getRecipesVegetarian(1, 6)
+              .then(data => 
+                this.setState({ 
+                  recipes: data.results, 
+                  vegetarian: true, 
+                  display2: true, 
+                  display1: false 
+                }))
+          }
+          else {
+            getRecipes(1, 6)
+              .then(data => this.setState({ 
+                recipes: data.results, 
+                display1: true 
+              }))
+          }
+        })
     } else {
       getRecipes(1, 6)
-      .then(data => this.setState({recipes: data.results}))
+        .then(data => this.setState({ 
+          recipes: data.results, 
+          display1: true 
+        }))
     }
   }
   handleBackButton = () => {
@@ -78,25 +92,66 @@ export default class Home extends React.Component {
   onPressRecipe = (item) => {
     this.props.navigation.navigate('RecipeDetail', { item });
   }
-  showMoreRecipes(vegetarian = false) {
-    const { page, limit, recipes } = this.state
-    if (vegetarian) {
-      getRecipesVegetarian(page, limit)
+  showMoreRecipesVegetarian() {
+    const { page2, limit, recipes} = this.state
+    const { isLogged } = this.context
+    if (isLogged) {
+      AsyncStorage.getItem('@vegetarian')
+        .then((data) => {
+          if(JSON.parse(data)) {
+            this.setState({ 
+              display2: true, 
+              display1: false 
+            })
+            getRecipesVegetarian(page2, limit)
+              .then(data => {
+                this.setState({ recipes: [...recipes, ...data.results] })
+                if (!data.next) {
+                  this.setState({ display2: false })
+                } else {
+                  this.setState({ page2: data.next.page })
+                }
+              }
+            )
+          }
+      })
+    }
+  }
+  showMoreRecipes() {
+    const { page1, limit } = this.state
+    const { isLogged } = this.context
+    if (isLogged) {
+      AsyncStorage.getItem('@vegetarian')
       .then(data => {
-          this.setState({recipes: [...recipes, ...data.results], page: page + 1})
-          if (!data.next) {
-            this.setState({ display: false })
-          } 
+        if (JSON.parse(data) === false) {
+          this.setState({
+            display1: true, 
+            display2: false
+          })
+          getRecipes(page1, limit).then(data => {
+            this.setState({ recipes: [...this.state.recipes, ...data.results] })
+            if (!data.next) {
+              this.setState({ display1: false })
+            } else {
+              this.setState({ page1: data.next.page })
+            }
+          })
+        } else {
+          this.setState({display1: false})
         }
-      )
+      })
     } else {
-      getRecipes(page, limit).then(data => {
-        this.setState({ recipes: [...this.state.recipes, ...data.results], page: page + 1})
+      this.setState({display1: true})
+      getRecipes(page1, limit).then(data => {
+        this.setState({ recipes: [...this.state.recipes, ...data.results] })
         if (!data.next) {
-          this.setState({ display: false })
+          this.setState({ display1: false })
+        } else {
+          this.setState({ page1: data.next.page })
         }
       })
     }
+
   }
   renderRecipes = ({ item }) => (
     <TouchableOpacity onPress={() => this.onPressRecipe(item)}>
@@ -107,7 +162,7 @@ export default class Home extends React.Component {
     this.props.navigation.addListener('didFocus', this.componentDidFocus.bind(this)).remove()
   }
   render() {
-    const { display } = this.state
+    const { display1, display2 } = this.state
     return (
       <ScrollView style={styles.background} contentContainerStyle={{ flex: 1, alignItems: 'center' }}>
         <Image
@@ -116,7 +171,7 @@ export default class Home extends React.Component {
         >
         </Image>
         <ScrollView style={styles.container}>
-          <Text style={styles.state}>MÓN ĂN MỚI NHẤT</Text>
+          <Text style={styles.state}>MÓN ĂN TIÊU BIỂU</Text>
           <FlatList
             numColumns={3}
             showsVerticalScrollIndicator={false}
@@ -125,7 +180,12 @@ export default class Home extends React.Component {
             keyExtractor={item => `${item._id}`}
             contentContainerStyle={styles.content}
           />
-          {display ? <TouchableOpacity onPress={() => this.showMoreRecipes(this.state.vegetarian)}>
+          {display1 ? <TouchableOpacity onPress={() => this.showMoreRecipes()}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ color: '#FF9797' }}>Xem thêm</Text>
+            </View>
+          </TouchableOpacity> : null}
+          {display2 ? <TouchableOpacity onPress={() => this.showMoreRecipesVegetarian()}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               <Text style={{ color: '#FF9797' }}>Xem thêm</Text>
             </View>

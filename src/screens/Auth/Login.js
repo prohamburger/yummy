@@ -57,7 +57,7 @@ class Login extends React.Component {
         }
       })
       .catch(e => {
-        console.log(e)
+        console.log(e.data.message)
       })
   }
   render() {

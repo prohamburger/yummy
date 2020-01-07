@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       backgroundColor: '#fff',
       marginTop: 10,
-      marginBottom: 10
+      marginBottom: 10,
     },
     background: {
       backgroundColor: '#ededed',
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-        marginLeft: 5,
+        marginLeft: 10,
         elevation: 4,
     },
     slide:{

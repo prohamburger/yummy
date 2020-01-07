@@ -69,9 +69,8 @@ export default class User extends React.Component {
     await AsyncStorage.getItem('@favourite')
       .then(data => {
         let temp = JSON.parse(data)
-        let favourite = temp.map(id => ({ id }))
 
-        this.setState({ favourite })
+        this.setState({ favourite: temp })
 
         getFavouriteRecipe(this.state.favourite)
           .then(data => {

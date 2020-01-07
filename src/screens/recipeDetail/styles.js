@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     position: "absolute",
-    right: 20
+    right: 20,
+    top: 10
   },
   timer: {
       height: 20,

@@ -93,8 +93,8 @@ export default class RecipeDetail extends React.Component{
                     />
                 </View>
                 <View style={styles.time}>
-                  <Image style={styles.timer} source={require("../../../assets/time.png")}/>
-                  <Text style={{color: '#FF9797'}}>{item.time}'</Text>
+                  <Icon name={"md-time"} style={{color: '#FF9797'}} size={20}></Icon>
+                  <Text style={{color: '#FF9797', marginLeft: 5}}> {item.time}'</Text>
                 </View>
               </View>
               <Ingredients ingredients={item.ingredients} title={item.title}/>
@@ -106,7 +106,7 @@ export default class RecipeDetail extends React.Component{
                       <View>
                           <Text 
                             style={styles.stepId}>{item.id}</Text>
-                          {item.photo[0] ? <ImageCollection images={item.photo} /> : null}
+                          {item.photo[0] ? <ImageCollection desciption={item.description} images={item.photo} /> : null}
                           <Text style={{marginLeft: 10, marginTop: 10, fontStyle: 'italic', width: 380}}>{item.description}</Text>
                       </View>
                       )}

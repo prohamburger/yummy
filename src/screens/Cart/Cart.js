@@ -24,6 +24,7 @@ export default class Cart extends React.Component{
           cartItems.length !== 0 ?
           <FlatList 
             data={cartItems}
+            keyExtractor={item => `${item.name}`}
             renderItem={({item}) => (
               <View style={styles.content}>
                 <Text style={styles.title}>{item.name}</Text>

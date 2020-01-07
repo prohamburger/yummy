@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import MenuButton from '../MenuButton/MenuButton';
 import styles from './styles';
 import { CartContext } from '../../context/CartProvider'
@@ -12,6 +12,7 @@ export default class Drawer extends React.Component {
     const { navigation } = this.props;
     return (
       <View style={styles.content}>
+        <Image style={styles.drawer} source={require('../../../assets/drawer.png')}></Image>
         <View style={styles.container}>
           <MenuButton
             title={'TRANG CHỦ'}
@@ -19,7 +20,7 @@ export default class Drawer extends React.Component {
             onPress={() => {
               navigation.navigate('Home');
               navigation.closeDrawer();
-            }
+              }
             }
           />
           <MenuButton
@@ -28,7 +29,7 @@ export default class Drawer extends React.Component {
             onPress={() => {
               navigation.navigate('Categories');
               navigation.closeDrawer();
-            }
+              }
             }
           />
           <MenuButton
@@ -37,7 +38,7 @@ export default class Drawer extends React.Component {
             onPress={() => {
               navigation.navigate('Cart');
               navigation.closeDrawer();
-            }
+              }
             }
           />
           <CartContext.Consumer>
@@ -49,7 +50,7 @@ export default class Drawer extends React.Component {
                 if(isLogged)
                   navigation.navigate('User');
                 navigation.closeDrawer();
-              }
+                }
               }
             /> :
             <MenuButton
@@ -58,7 +59,7 @@ export default class Drawer extends React.Component {
             onPress={() => {
               isLogged ? navigation.navigate('User') : navigation.navigate('Login');
               navigation.closeDrawer();
-            }
+              }
             }
           /> 
             )}

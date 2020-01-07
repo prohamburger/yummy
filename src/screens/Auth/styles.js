@@ -4,11 +4,11 @@ const HEIGHT = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       width: WIDTH,
-      height: HEIGHT + 50,
+      resizeMode: 'cover',
+      flex: 1,
     },
     input:{
       height: 40,

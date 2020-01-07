@@ -2,7 +2,7 @@ import { recipes, categories } from '../data/dataArrays';
 import { Buffer } from 'buffer'
 import { Alert, AsyncStorage } from 'react-native'
 
-axios.defaults.baseURL = 'http://192.168.1.12:3000/'
+axios.defaults.baseURL = 'https://backend-yummy.herokuapp.com'
 
 import axios from 'axios'
 
@@ -94,7 +94,8 @@ export async function LoginUser(user) {
     })
     return response
   } catch (e) {
-    console.log(e.response)
+    console.log(e.response.message)
+    Alert.alert('Thông báo', 'Sai thông tin đăng nhập');
   }
 }
 
@@ -117,13 +118,11 @@ export async function favourite(recipe_id) {
 
 export async function getFavouriteRecipe(array) {
   let listFavourite = []
-  for (let i = 0; i < array.length; i++) {
     try {
-      const response = await axios.get(`recipes/recipe/${array[i].id}`)
-      listFavourite.push(response.data)
+      const response = await axios.post(`recipes/favourite`, {favourite: array})
+      listFavourite = response.data
     } catch(e) {
       console.log(e)
     }
-  }
   return listFavourite
 }

@@ -4,9 +4,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     content: {
       flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center'
+      backgroundColor: '#f5f5f5'
+    },
+    drawer:{
+      width: 250
     },
     container: {
       flex: 1,
